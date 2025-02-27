@@ -28,13 +28,15 @@ export const setCookies = (res, tokens) => {
     httpOnly: true,
     secure: true,
     sameSite: 'None',
+    domain: '.render.com', // Allow subdomains to access the cookie
     maxAge: 1 * 60 * 1000, // 1 hour
   });
 
   res.cookie('refreshToken', refreshToken, {
-    // httpOnly: true,
+    httpOnly: false,
     secure: true,
     sameSite: 'None',
+    domain: '.render.com', // Allow subdomains to access the cookie
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
 
@@ -42,13 +44,15 @@ export const setCookies = (res, tokens) => {
     httpOnly: true,
     secure: true,
     sameSite: 'None',
+    domain: '.render.com', // Allow subdomains to access the cookie
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
   });
 
   res.cookie('csrfToken', csrfToken, {
-    // httpOnly: true,
+    httpOnly: false,
     secure: true,
     sameSite: 'None',
+    domain: '.render.com', // Allow subdomains to access the cookie
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
     path: '/',
   });
