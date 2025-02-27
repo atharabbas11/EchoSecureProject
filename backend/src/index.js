@@ -18,14 +18,21 @@ const CLIENT_URL = process.env.CLIENT_URL;
 const __dirname = path.resolve();
 
 app.use(cookieParser());
+
+// Increase the payload size limit for JSON and URL-encoded data
+app.use(express.json({ limit: '50mb' }));  // Increase the size limit as necessary
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-CSRF-Token"],
   })
 );
+
+app.options('*', cors());  // Handles pre-flight OPTIONS requests
 
 app.use(express.json());
 app.use("/api/auth", authRoutes);
@@ -37,12 +44,6 @@ if (process.env.CLIENT_URL === "production") {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
 }
-
-// Increase the payload size limit for JSON and URL-encoded data
-app.use(express.json({ limit: '50mb' }));  // Increase the size limit as necessary
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
-
-app.options('*', cors());  // Handles pre-flight OPTIONS requests
 
 server.listen(PORT, () => {
   // console.log("server is running on PORT:" + PORT);
