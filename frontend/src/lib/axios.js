@@ -9,14 +9,19 @@ import { useAuthStore } from "../store/useAuthStore"; // Import the auth store
 // });
 
 
-const localIP = import.meta.env.VITE_API_BASE_URL; // Replace with your actual local IP
-// console.log("VITE_API_BASE_URL:", localIP); // Debugging line
+// const localIP = import.meta.env.VITE_API_BASE_URL; // Replace with your actual local IP
+// // console.log("VITE_API_BASE_URL:", localIP); // Debugging line
   
+// export const axiosInstance = axios.create({
+//   baseURL: import.meta.env.MODE === "development" ? `${localIP}` : "/api",
+//   withCredentials: true,
+// });
+
 export const axiosInstance = axios.create({
-  baseURL: import.meta.env.MODE === "development" ? `${localIP}` : "/api",
+  // baseURL: import.meta.env.MODE === "development" ? `${localIP}` : "/api",
+  baseURL: import.meta.env.VITE_API_BASE_URL,
   withCredentials: true,
 });
-
 
 const getCSRFTokenWithRetry = async () => {
   let retries = 3;
