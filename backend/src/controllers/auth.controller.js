@@ -76,6 +76,7 @@ export const verifyOTPAndLogin = async (req, res) => {
       fullName: user.fullName,
       email: user.email,
       profilePic: user.profilePic,
+      csrfToken,  // Add csrfToken to the response
     });
   } catch (error) {
     res.status(500).json({ message: 'Internal Server Error' });
