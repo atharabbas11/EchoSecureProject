@@ -20,7 +20,7 @@ const __dirname = path.resolve();
 app.use(cookieParser());
 app.use(
   cors({
-    origin: CLIENT_URL,
+    origin: process.env.CLIENT_URL,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
